@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-slate-50">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,37 +34,50 @@
             }
         </script>
     @endif
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-image: url("{{ asset('images/login-bg.jpg') }}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+    </style>
 </head>
-<body class="h-full flex flex-col justify-between antialiased text-slate-800 bg-slate-50 selection:bg-indigo-500 selection:text-white">
+<body class="min-h-full flex flex-col justify-between antialiased text-slate-800 bg-slate-900/10 selection:bg-indigo-500 selection:text-white">
     
-    <!-- Top Minimal Navigation -->
-    <header class="py-6 px-6 sm:px-10 flex items-center justify-between max-w-7xl w-full mx-auto">
-        <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
-                <span class="material-symbols-rounded text-2xl">school</span>
+    <!-- Top Floating Header -->
+    <header class="pt-6 px-4 sm:px-8 max-w-7xl w-full mx-auto">
+        <div class="bg-white/85 backdrop-blur-md rounded-2xl border border-white/70 shadow-xs px-5 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
+                    <span class="material-symbols-rounded text-2xl">school</span>
+                </div>
+                <div>
+                    <span class="font-bold text-base sm:text-lg text-slate-900 tracking-tight leading-none block">Olive Learnings</span>
+                    <span class="text-[11px] text-slate-500 font-medium mt-0.5 block">Admin Management Console</span>
+                </div>
             </div>
-            <div>
-                <span class="font-bold text-lg text-slate-900 tracking-tight leading-none">Olive Learnings</span>
-                <span class="block text-[11px] text-slate-500 font-medium mt-0.5">Admin Management</span>
-            </div>
+            <a href="mailto:support@olivelearnings.com" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100/70">
+                <span class="material-symbols-rounded text-base text-slate-500">support</span>
+                <span class="hidden sm:inline">Need Help?</span>
+            </a>
         </div>
-        <a href="mailto:support@olivelearnings.com" class="text-xs font-medium text-slate-500 hover:text-slate-800 transition flex items-center gap-1.5">
-            <span class="material-symbols-rounded text-base">support</span>
-            <span>Need Help?</span>
-        </a>
     </header>
 
-    <!-- Main Auth Container -->
+    <!-- Main Auth Card Container -->
     <main class="flex-1 flex items-center justify-center px-4 py-8 sm:px-6">
         <div class="w-full max-w-[420px]">
             
-            <!-- Card Container -->
-            <div class="bg-white rounded-2xl p-7 sm:p-9 shadow-sm border border-slate-200/80">
+            <!-- Frosted Glass Card Container -->
+            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-7 sm:p-9 shadow-[0_20px_50px_rgba(15,23,42,0.12)] border border-white/80">
                 
                 <!-- Heading -->
-                <div class="mb-7">
+                <div class="mb-6">
                     <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Sign in</h1>
-                    <p class="text-sm text-slate-500 mt-1">Please enter your admin credentials to continue</p>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Please enter your admin credentials to continue</p>
                 </div>
 
                 <!-- Error Alert -->
@@ -82,7 +95,7 @@
 
                     <!-- Email Field -->
                     <div>
-                        <label for="email" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                        <label for="email" class="block text-xs font-bold text-slate-700 mb-1.5">
                             Email address
                         </label>
                         <div class="relative">
@@ -91,7 +104,7 @@
                                 name="email" 
                                 id="email" 
                                 value="{{ old('email') }}"
-                                class="w-full h-11 px-3.5 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition shadow-2xs"
+                                class="w-full h-11 px-3.5 bg-slate-50/60 focus:bg-white border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition shadow-2xs"
                                 placeholder="name@olivelearnings.com"
                                 required
                                 autofocus
@@ -102,10 +115,10 @@
                     <!-- Password Field -->
                     <div>
                         <div class="flex items-center justify-between mb-1.5">
-                            <label for="password" class="block text-xs font-semibold text-slate-700">
+                            <label for="password" class="block text-xs font-bold text-slate-700">
                                 Password
                             </label>
-                            <a href="#" class="text-xs font-medium text-indigo-600 hover:text-indigo-700 transition">
+                            <a href="#" class="text-xs font-semibold text-indigo-600 hover:text-indigo-700 transition">
                                 Forgot password?
                             </a>
                         </div>
@@ -115,7 +128,7 @@
                                 name="password" 
                                 id="password" 
                                 value=""
-                                class="w-full h-11 pl-3.5 pr-10 bg-white border border-slate-300 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition shadow-2xs"
+                                class="w-full h-11 pl-3.5 pr-10 bg-slate-50/60 focus:bg-white border border-slate-300 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-600 transition shadow-2xs"
                                 placeholder="••••••••"
                                 required
                             >
@@ -139,16 +152,16 @@
                                 type="checkbox" 
                                 class="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500/20 focus:ring-2 transition"
                             >
-                            <span class="text-xs text-slate-600">Remember me for 30 days</span>
+                            <span class="text-xs text-slate-600 font-medium">Remember me for 30 days</span>
                         </label>
                     </div>
 
                     <!-- Submit Button -->
                     <button 
                         type="submit" 
-                        class="w-full h-11 mt-2 rounded-lg font-semibold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] transition shadow-xs flex items-center justify-center gap-2"
+                        class="w-full h-11 mt-2 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] transition shadow-sm shadow-indigo-200 flex items-center justify-center gap-2"
                     >
-                        <span>Sign in</span>
+                        <span>Sign In to Admin</span>
                         <span class="material-symbols-rounded text-lg">arrow_forward</span>
                     </button>
                 </form>
@@ -156,8 +169,8 @@
             </div>
 
             <!-- Security Trust Note -->
-            <div class="mt-6 text-center text-xs text-slate-400 flex items-center justify-center gap-1.5">
-                <span class="material-symbols-rounded text-slate-400 text-base">lock</span>
+            <div class="mt-4 text-center text-xs text-slate-600 flex items-center justify-center gap-1.5 font-medium drop-shadow-xs">
+                <span class="material-symbols-rounded text-slate-600 text-base">lock</span>
                 <span>Encrypted & secure session</span>
             </div>
 
@@ -165,14 +178,16 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 px-6 text-center text-xs text-slate-400 border-t border-slate-200/60 max-w-7xl w-full mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p>© {{ date('Y') }} Olive Learnings. All rights reserved.</p>
-        <div class="flex items-center gap-4 text-slate-500">
-            <a href="#" class="hover:text-slate-700 transition">Privacy</a>
-            <span>•</span>
-            <a href="#" class="hover:text-slate-700 transition">Terms</a>
-            <span>•</span>
-            <a href="#" class="hover:text-slate-700 transition">Support</a>
+    <footer class="pb-6 px-4 max-w-7xl w-full mx-auto">
+        <div class="bg-white/80 backdrop-blur-md rounded-2xl border border-white/70 shadow-2xs px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <p>© {{ date('Y') }} Olive Learnings. All rights reserved.</p>
+            <div class="flex items-center gap-4 text-slate-600 font-medium">
+                <a href="#" class="hover:text-indigo-600 transition">Privacy</a>
+                <span>•</span>
+                <a href="#" class="hover:text-indigo-600 transition">Terms</a>
+                <span>•</span>
+                <a href="#" class="hover:text-indigo-600 transition">Support</a>
+            </div>
         </div>
     </footer>
 
