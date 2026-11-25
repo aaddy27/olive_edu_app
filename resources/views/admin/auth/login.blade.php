@@ -11,7 +11,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            indigo: {
+                                50: '#eef2ff',
+                                100: '#e0e7ff',
+                                200: '#c7d2fe',
+                                500: '#6366f1',
+                                600: '#4f46e5',
+                                700: '#4338ca',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    @endif
 </head>
 <body class="h-full flex flex-col justify-between antialiased text-slate-800 bg-slate-50 selection:bg-indigo-500 selection:text-white">
     
@@ -46,7 +68,7 @@
                 </div>
 
                 <!-- Error Alert -->
-                @if ($errors->any())
+                @if (isset($errors) && $errors->any())
                     <div class="mb-5 p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3">
                         <span class="material-symbols-rounded text-rose-500 text-lg mt-0.5">error</span>
                         <div class="text-xs font-medium">

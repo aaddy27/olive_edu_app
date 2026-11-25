@@ -12,7 +12,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            indigo: {
+                                50: '#eef2ff',
+                                100: '#e0e7ff',
+                                200: '#c7d2fe',
+                                500: '#6366f1',
+                                600: '#4f46e5',
+                                700: '#4338ca',
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
+    @endif
     @stack('styles')
 </head>
 <body class="h-full text-slate-800 antialiased bg-slate-50 selection:bg-indigo-500 selection:text-white">
