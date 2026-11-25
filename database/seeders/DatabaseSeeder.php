@@ -439,6 +439,51 @@ class DatabaseSeeder extends Seeder
         ]);
         $courseFreeChemistry->subjects()->attach($subjChemistry->id, ['sort_order' => 0]);
 
+        // 6.4 100% Free Course: Vedic Mathematics & Super Fast Calculation Tricks
+        $courseFreeVedicMath = Course::create([
+            'exam_board_id' => $boardCompetitive->id,
+            'title' => 'Free Vedic Mathematics & Rapid Calculation Tricks',
+            'slug' => 'free-vedic-mathematics-rapid-calculation-tricks',
+            'description' => 'Master mental arithmetic, lightning-fast multiplication, square roots, and algebraic shortcuts essential for all competitive and board exams.',
+            'price' => 0.00,
+            'currency' => 'INR',
+            'is_published' => true,
+            'thumbnail_path' => 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80',
+            'created_by' => $superAdmin->id,
+        ]);
+        $courseFreeVedicMath->subjects()->attach($subjMathematics->id, ['sort_order' => 0]);
+
+        // 6.5 100% Free Course: Daily Current Affairs & General Studies 2026
+        $courseFreeCurrentAffairs = Course::create([
+            'exam_board_id' => $boardCompetitive->id,
+            'title' => 'Daily Current Affairs & General Studies Foundation 2026',
+            'slug' => 'daily-current-affairs-general-studies-2026',
+            'description' => 'Daily analytical video series and editorial breakdown covering Indian Constitution, Union Budget, Science & Tech, and Global Affairs.',
+            'price' => 0.00,
+            'currency' => 'INR',
+            'is_published' => true,
+            'thumbnail_path' => 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=800&q=80',
+            'created_by' => $academicAdmin->id,
+        ]);
+        $courseFreeCurrentAffairs->subjects()->attach([
+            $subjGeneralStudies->id => ['sort_order' => 0],
+            $subjPolity->id => ['sort_order' => 1],
+        ]);
+
+        // 6.6 100% Free Course: Spoken English & Grammar Masterclass
+        $courseFreeEnglish = Course::create([
+            'exam_board_id' => $boardCbse->id,
+            'title' => 'Free Spoken English & Grammar Foundation Masterclass',
+            'slug' => 'free-spoken-english-grammar-masterclass',
+            'description' => 'Complete zero-cost English module covering Subject-Verb Agreement, Active-Passive Voice, Vocabulary Roots, and Everyday Conversation.',
+            'price' => 0.00,
+            'currency' => 'INR',
+            'is_published' => true,
+            'thumbnail_path' => 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80',
+            'created_by' => $superAdmin->id,
+        ]);
+        $courseFreeEnglish->subjects()->attach($subjEnglish->id, ['sort_order' => 0]);
+
         // 6.4 Government Exam Multidisciplinary Foundation (Published, Moderate Price)
         $courseSscLdc = Course::create([
             'exam_board_id' => $boardCompetitive->id,
@@ -601,6 +646,99 @@ class DatabaseSeeder extends Seeder
             'status' => 'ready',
         ]);
 
+        // Course 5: Free Vedic Mathematics Videos
+        Video::create([
+            'course_id' => $courseFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'title' => '01. Mental Maths: 11-Rule, Criss-Cross & Base Multiplication Tricks',
+            'description' => 'Solve 2-digit and 3-digit multiplication in seconds without paper calculation.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            'duration_seconds' => 1200,
+            'view_limit' => 10,
+            'sort_order' => 1,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
+        Video::create([
+            'course_id' => $courseFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'title' => '02. Lightning Fast Square Roots & Cube Roots in 5 Seconds',
+            'description' => 'Shortcut elimination method for perfect and non-perfect roots.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+            'duration_seconds' => 1500,
+            'view_limit' => 10,
+            'sort_order' => 2,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
+        // Course 6: Free Current Affairs & General Studies Videos
+        Video::create([
+            'course_id' => $courseFreeCurrentAffairs->id,
+            'subject_id' => $subjPolity->id,
+            'title' => '01. Landmark Supreme Court Cases & Fundamental Rights Overview',
+            'description' => 'Kesavananda Bharati, Maneka Gandhi, and recent constitutional bench decisions explained.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+            'duration_seconds' => 1800,
+            'view_limit' => 10,
+            'sort_order' => 1,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
+        Video::create([
+            'course_id' => $courseFreeCurrentAffairs->id,
+            'subject_id' => $subjGeneralStudies->id,
+            'title' => '02. Union Budget 2026 Analysis & Fiscal Deficit Explained',
+            'description' => 'Capital expenditure trends, tax slab restructuring, and major government schemes.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+            'duration_seconds' => 2100,
+            'view_limit' => 10,
+            'sort_order' => 2,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
+        // Course 7: Free Spoken English Videos
+        Video::create([
+            'course_id' => $courseFreeEnglish->id,
+            'subject_id' => $subjEnglish->id,
+            'title' => '01. Master 10 Essential Rules of Subject-Verb Agreement',
+            'description' => 'Avoid the most common grammatical pitfalls tested in competitive and board exams.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+            'duration_seconds' => 1350,
+            'view_limit' => 10,
+            'sort_order' => 1,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
+        Video::create([
+            'course_id' => $courseFreeEnglish->id,
+            'subject_id' => $subjEnglish->id,
+            'title' => '02. Power Vocabulary: 50 Root Words That Unlock 500 English Words',
+            'description' => 'Etymological breakdown of Greek and Latin roots to build an unstoppable lexicon.',
+            'video_url' => 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4',
+            'duration_seconds' => 1600,
+            'view_limit' => 10,
+            'sort_order' => 2,
+            'is_preview' => true,
+            'is_free' => true,
+            'is_active' => true,
+            'status' => 'ready',
+        ]);
+
 
         // ==========================================
         // 8. TESTS & TEST SERIES (Parent & Child Tests)
@@ -737,6 +875,186 @@ class DatabaseSeeder extends Seeder
             'price' => 99.00,
             'is_free' => false,
             'is_active' => false, // INACTIVE TEST
+            'is_test_series' => false,
+            'parent_id' => null,
+        ]);
+
+        // 8.7 100% FREE Parent Test Series 1: All India Free Scholarship & Diagnostic Mock Test Series
+        $freeTestSeriesScholarship = Test::create([
+            'course_id' => $coursePhysics->id,
+            'title' => 'All India Free Scholarship & Diagnostic Mock Test Series 2026',
+            'slug' => 'all-india-free-scholarship-mock-test-series-2026',
+            'description' => 'National-level free diagnostic mock series for JEE & NEET aspirants with all-India percentile ranking and detailed solutions.',
+            'instructions' => 'Free access for all students. Answer all MCQs within the allotted duration. Negative marking applies (-1 per wrong answer).',
+            'total_questions' => 10,
+            'duration_minutes' => 60,
+            'duration' => 60,
+            'total_marks' => 40,
+            'passing_marks' => 16,
+            'negative_marking' => 1.00,
+            'price' => 0.00,
+            'is_free' => true, // 100% FREE TEST SERIES
+            'is_active' => true,
+            'is_test_series' => true, // PARENT TEST SERIES
+            'parent_id' => null,
+        ]);
+
+        $freeTestSeriesScholarship->subjects()->attach([
+            $subjPhysics->id => ['question_count' => 5],
+            $subjChemistry->id => ['question_count' => 5],
+        ]);
+
+        // Child Test 1 (Under Free Scholarship Series)
+        $freeChildTest1 = Test::create([
+            'parent_id' => $freeTestSeriesScholarship->id,
+            'course_id' => $coursePhysics->id,
+            'subject_id' => $subjPhysics->id,
+            'title' => 'Free Mock 01: Physics Mechanics & Dimensional Analysis',
+            'slug' => 'free-mock-01-physics-mechanics',
+            'test_number' => 1,
+            'description' => 'Complete free mock test covering Kinematics, Newton Laws, Work Power Energy, and Units.',
+            'instructions' => '5 questions, 20 marks, 30 minutes duration. +4 for correct, -1 for wrong.',
+            'total_questions' => 5,
+            'duration_minutes' => 30,
+            'duration' => 30,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 1.00,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
+            'is_test_series' => false,
+        ]);
+
+        // Child Test 2 (Under Free Scholarship Series)
+        $freeChildTest2 = Test::create([
+            'parent_id' => $freeTestSeriesScholarship->id,
+            'course_id' => $coursePhysics->id,
+            'subject_id' => $subjChemistry->id,
+            'title' => 'Free Mock 02: Chemistry Atomic Structure & Bonding',
+            'slug' => 'free-mock-02-chemistry-atomic-structure',
+            'test_number' => 2,
+            'description' => 'Free practice paper covering Bohr Model, Quantum Numbers, and Chemical Bonding.',
+            'instructions' => '5 questions, 20 marks, 30 minutes duration. +4 for correct, -1 for wrong.',
+            'total_questions' => 5,
+            'duration_minutes' => 30,
+            'duration' => 30,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 1.00,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
+            'is_test_series' => false,
+        ]);
+
+        // 8.8 100% FREE Parent Test Series 2: SSC & Govt Exams Free Weekly Mock Challenge
+        $freeTestSeriesSsc = Test::create([
+            'course_id' => $courseSscLdc->id,
+            'title' => 'SSC & Govt Exams Free Weekly Mock Challenge 2026',
+            'slug' => 'ssc-govt-exams-free-weekly-mock-challenge-2026',
+            'description' => 'Weekly free simulated test series designed for SSC CGL, CHSL, and State Public Service Commission aspirants.',
+            'instructions' => 'Negative marking of 0.50 applies per incorrect answer. Review explanations after finishing.',
+            'total_questions' => 10,
+            'duration_minutes' => 45,
+            'duration' => 45,
+            'total_marks' => 40,
+            'passing_marks' => 16,
+            'negative_marking' => 0.50,
+            'price' => 0.00,
+            'is_free' => true, // 100% FREE TEST SERIES
+            'is_active' => true,
+            'is_test_series' => true, // PARENT TEST SERIES
+            'parent_id' => null,
+        ]);
+
+        $freeTestSeriesSsc->subjects()->attach([
+            $subjPolity->id => ['question_count' => 5],
+            $subjEnglish->id => ['question_count' => 5],
+        ]);
+
+        // Child Test 1 (Under Free SSC Series)
+        $freeSscChild1 = Test::create([
+            'parent_id' => $freeTestSeriesSsc->id,
+            'course_id' => $courseSscLdc->id,
+            'subject_id' => $subjPolity->id,
+            'title' => 'SSC Weekly Mock 01: Indian Constitution & Polity Essentials',
+            'slug' => 'ssc-weekly-mock-01-indian-constitution',
+            'test_number' => 1,
+            'description' => 'Covers Preamble, Fundamental Rights, Directive Principles, and President powers.',
+            'instructions' => '5 questions, 20 marks, 20 minutes duration. +4 for correct, -0.5 for wrong.',
+            'total_questions' => 5,
+            'duration_minutes' => 20,
+            'duration' => 20,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 0.50,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
+            'is_test_series' => false,
+        ]);
+
+        // Child Test 2 (Under Free SSC Series)
+        $freeSscChild2 = Test::create([
+            'parent_id' => $freeTestSeriesSsc->id,
+            'course_id' => $courseSscLdc->id,
+            'subject_id' => $subjEnglish->id,
+            'title' => 'SSC Weekly Mock 02: English Vocab & Sentence Improvement',
+            'slug' => 'ssc-weekly-mock-02-english-vocab',
+            'test_number' => 2,
+            'description' => 'Covers Synonyms, Antonyms, Idioms, One Word Substitutions, and Cloze Test.',
+            'instructions' => '5 questions, 20 marks, 20 minutes duration. +4 for correct, -0.5 for wrong.',
+            'total_questions' => 5,
+            'duration_minutes' => 20,
+            'duration' => 20,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 0.50,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
+            'is_test_series' => false,
+        ]);
+
+        // 8.9 Standalone Free Test 2: NEET Biology Rapid Revision Test
+        $testFreeBiology = Test::create([
+            'course_id' => $courseNeetPcb->id,
+            'subject_id' => $subjBiology->id,
+            'title' => 'NEET Biology Free Rapid Fire Quiz (Genetics & Physiology)',
+            'slug' => 'neet-biology-free-rapid-fire-quiz',
+            'description' => 'High-yield 5 question NCERT based diagnostic quiz to test genetics and human body systems.',
+            'instructions' => 'Each correct answer gives +4 marks; each incorrect deducts -1 mark.',
+            'total_questions' => 5,
+            'duration_minutes' => 15,
+            'duration' => 15,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 1.00,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
+            'is_test_series' => false,
+            'parent_id' => null,
+        ]);
+
+        // 8.10 Standalone Free Test 3: Vedic Maths & Quantitative Speed Test
+        $testFreeVedicMath = Test::create([
+            'course_id' => $courseFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'title' => 'Vedic Maths & Speed Calculation Free Challenge',
+            'slug' => 'vedic-maths-speed-calculation-free-challenge',
+            'description' => 'Test your mental calculation speed with 5 high-speed arithmetic questions.',
+            'instructions' => 'Try to solve each question in under 30 seconds without scratch paper.',
+            'total_questions' => 5,
+            'duration_minutes' => 10,
+            'duration' => 10,
+            'total_marks' => 20,
+            'passing_marks' => 8,
+            'negative_marking' => 1.00,
+            'price' => 0.00,
+            'is_free' => true,
+            'is_active' => true,
             'is_test_series' => false,
             'parent_id' => null,
         ]);
@@ -973,6 +1291,504 @@ class DatabaseSeeder extends Seeder
             'marks' => 4.00,
             'negative_marks' => 1.00,
             'explanation' => 'HCHO has no electron donating alkyl groups and minimal steric hindrance, leaving its carbonyl carbon highly electrophilic.',
+        ]);
+
+        // ========================================================
+        // Questions for Free Scholarship Series - Child Test 1 (Physics)
+        // ========================================================
+        Question::create([
+            'test_id' => $freeChildTest1->id,
+            'subject_id' => $subjPhysics->id,
+            'question_text' => 'A ball is thrown vertically upwards with a velocity of 20 m/s. Taking g = 10 m/s², what is the maximum height attained?',
+            'options' => [
+                'a' => '15 meters',
+                'b' => '20 meters',
+                'c' => '25 meters',
+                'd' => '30 meters',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Using v² = u² - 2gh. At maximum height, v = 0. Therefore h = u² / 2g = (20 × 20) / (2 × 10) = 400 / 20 = 20 meters.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest1->id,
+            'subject_id' => $subjPhysics->id,
+            'question_text' => 'The SI unit of magnetic flux is:',
+            'options' => [
+                'a' => 'Tesla',
+                'b' => 'Weber',
+                'c' => 'Henry',
+                'd' => 'Gauss',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Magnetic flux is measured in Weber (Wb) in the SI system. Tesla (T) is the unit of magnetic flux density (B).',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest1->id,
+            'subject_id' => $subjPhysics->id,
+            'question_text' => 'Two forces of magnitude 6 N and 8 N act at a right angle (90°) to each other. What is the magnitude of their resultant force?',
+            'options' => [
+                'a' => '14 N',
+                'b' => '10 N',
+                'c' => '2 N',
+                'd' => '7 N',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Resultant R = √(A² + B² + 2AB cos θ). For θ = 90°, R = √(6² + 8²) = √(36 + 64) = √100 = 10 N.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest1->id,
+            'subject_id' => $subjPhysics->id,
+            'question_text' => 'Which thermodynamic process occurs at constant volume?',
+            'options' => [
+                'a' => 'Isothermal',
+                'b' => 'Isobaric',
+                'c' => 'Isochoric',
+                'd' => 'Adiabatic',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'An isochoric (or isometric) process is one in which the volume remains strictly constant (ΔV = 0, Work W = 0).',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest1->id,
+            'subject_id' => $subjPhysics->id,
+            'question_text' => 'A convex lens of focal length 20 cm produces a real image of the same size as the object. The distance of the object from the lens is:',
+            'options' => [
+                'a' => '10 cm',
+                'b' => '20 cm',
+                'c' => '40 cm',
+                'd' => '60 cm',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'A convex lens forms a real, inverted image of the same size when the object is placed at 2F (twice the focal length). Here 2f = 2 × 20 = 40 cm.',
+        ]);
+
+        // ========================================================
+        // Questions for Free Scholarship Series - Child Test 2 (Chemistry)
+        // ========================================================
+        Question::create([
+            'test_id' => $freeChildTest2->id,
+            'subject_id' => $subjChemistry->id,
+            'question_text' => 'What is the total number of orbitals associated with the principal quantum number n = 3?',
+            'options' => [
+                'a' => '3',
+                'b' => '6',
+                'c' => '9',
+                'd' => '18',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'The total number of orbitals in any principal shell is given by n². For n = 3, n² = 3² = 9 (1 s-orbital, 3 p-orbitals, and 5 d-orbitals).',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest2->id,
+            'subject_id' => $subjChemistry->id,
+            'question_text' => 'Which of the following molecules has a dipole moment equal to zero?',
+            'options' => [
+                'a' => 'H₂O',
+                'b' => 'NH₃',
+                'c' => 'BF₃',
+                'd' => 'SO₂',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'BF₃ possesses a symmetrical trigonal planar geometry (120° bond angles). The individual B-F bond dipoles cancel out symmetrically giving a net dipole moment μ = 0.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest2->id,
+            'subject_id' => $subjChemistry->id,
+            'question_text' => 'The pH of a 0.001 M hydrochloric acid (HCl) solution at 25°C is:',
+            'options' => [
+                'a' => '1',
+                'b' => '2',
+                'c' => '3',
+                'd' => '4',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'HCl is a strong monoprotic acid. [H⁺] = 10⁻³ M. pH = -log₁₀[H⁺] = -log₁₀(10⁻³) = 3.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest2->id,
+            'subject_id' => $subjChemistry->id,
+            'question_text' => 'According to Le Chatelier\'s principle, increasing the pressure in the synthesis of ammonia (N₂ + 3H₂ ⇌ 2NH₃) will:',
+            'options' => [
+                'a' => 'Shift equilibrium forward (more NH₃)',
+                'b' => 'Shift equilibrium backward',
+                'c' => 'Have no effect on equilibrium',
+                'd' => 'Decompose ammonia immediately',
+            ],
+            'correct_option' => 'a',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Increasing pressure favors the direction with fewer moles of gas. Reactants = 4 moles, products = 2 moles. Thus equilibrium shifts towards products (forward).',
+        ]);
+
+        Question::create([
+            'test_id' => $freeChildTest2->id,
+            'subject_id' => $subjChemistry->id,
+            'question_text' => 'Which element has the highest electronegativity on the Pauling scale?',
+            'options' => [
+                'a' => 'Oxygen (O)',
+                'b' => 'Fluorine (F)',
+                'c' => 'Chlorine (Cl)',
+                'd' => 'Nitrogen (N)',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Fluorine is the most electronegative element with a Pauling value of 3.98 (approximately 4.0).',
+        ]);
+
+        // ========================================================
+        // Questions for Free SSC Mock Series - Child Test 1 (Polity)
+        // ========================================================
+        Question::create([
+            'test_id' => $freeSscChild1->id,
+            'subject_id' => $subjPolity->id,
+            'question_text' => 'Which Article of the Indian Constitution is referred to as the "Heart and Soul of the Constitution" by Dr. B.R. Ambedkar?',
+            'options' => [
+                'a' => 'Article 14 (Equality before Law)',
+                'b' => 'Article 19 (Right to Freedom)',
+                'c' => 'Article 21 (Protection of Life & Liberty)',
+                'd' => 'Article 32 (Right to Constitutional Remedies)',
+            ],
+            'correct_option' => 'd',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'Article 32 provides the right to approach the Supreme Court for enforcement of fundamental rights, termed the Heart and Soul by Dr. Ambedkar.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild1->id,
+            'subject_id' => $subjPolity->id,
+            'question_text' => 'What is the minimum age prescribed for appointment as the Governor of an Indian State?',
+            'options' => [
+                'a' => '25 years',
+                'b' => '30 years',
+                'c' => '35 years',
+                'd' => '40 years',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'According to Article 157, a person must be an Indian citizen and have completed the age of 35 years to be eligible for appointment as Governor.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild1->id,
+            'subject_id' => $subjPolity->id,
+            'question_text' => 'The concept of Directive Principles of State Policy (DPSP) in the Indian Constitution was borrowed from which country?',
+            'options' => [
+                'a' => 'United States of America',
+                'b' => 'Ireland',
+                'c' => 'United Kingdom',
+                'd' => 'Canada',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'Part IV of the Indian Constitution (DPSPs, Articles 36-51) was inspired by the Irish Constitution of 1937.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild1->id,
+            'subject_id' => $subjPolity->id,
+            'question_text' => 'Who presides over the Joint Sitting of both Houses of Parliament in India?',
+            'options' => [
+                'a' => 'President of India',
+                'b' => 'Vice-President of India',
+                'c' => 'Speaker of Lok Sabha',
+                'd' => 'Prime Minister of India',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'Under Article 118(4), the Speaker of Lok Sabha presides over a joint sitting of Parliament called by the President under Article 108.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild1->id,
+            'subject_id' => $subjPolity->id,
+            'question_text' => 'Under which Constitutional Amendment was the Right to Property removed from the list of Fundamental Rights?',
+            'options' => [
+                'a' => '42nd Amendment Act, 1976',
+                'b' => '44th Amendment Act, 1978',
+                'c' => '52nd Amendment Act, 1985',
+                'd' => '73rd Amendment Act, 1992',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'The 44th Constitutional Amendment Act of 1978 removed Right to Property from Part III and made it a legal right under Article 300A.',
+        ]);
+
+        // ========================================================
+        // Questions for Free SSC Mock Series - Child Test 2 (English)
+        // ========================================================
+        Question::create([
+            'test_id' => $freeSscChild2->id,
+            'subject_id' => $subjEnglish->id,
+            'question_text' => 'Select the most appropriate SYNONYM of the given word: "EPHEMERAL"',
+            'options' => [
+                'a' => 'Eternal',
+                'b' => 'Transitory',
+                'c' => 'Enormous',
+                'd' => 'Resilient',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'Ephemeral means lasting for a very short time. Transitory is an exact synonym. Eternal is the antonym.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild2->id,
+            'subject_id' => $subjEnglish->id,
+            'question_text' => 'Identify the segment containing a grammatical error: "Neither of the two students / were present in the classroom / during the seminar."',
+            'options' => [
+                'a' => 'Neither of the two students',
+                'b' => 'were present in the classroom',
+                'c' => 'during the seminar',
+                'd' => 'No error',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => '"Neither" is singular when referring to individual choices. It takes a singular verb "was present" instead of plural "were present".',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild2->id,
+            'subject_id' => $subjEnglish->id,
+            'question_text' => 'What is the meaning of the idiom: "To spill the beans"?',
+            'options' => [
+                'a' => 'To waste food carelessly',
+                'b' => 'To reveal a secret prematurely',
+                'c' => 'To work hard in fields',
+                'd' => 'To lose temper suddenly',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => '"Spill the beans" is an idiom that means divulging secret or confidential information without intended timing.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild2->id,
+            'subject_id' => $subjEnglish->id,
+            'question_text' => 'Choose the correct ONE-WORD substitution: "A person who renounces a religious or political belief"',
+            'options' => [
+                'a' => 'Apostate',
+                'b' => 'Agnostic',
+                'c' => 'Altruist',
+                'd' => 'Ascetic',
+            ],
+            'correct_option' => 'a',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'An apostate is someone who abandons or rejects a religious or political principle. Agnostic questions divine certainty.',
+        ]);
+
+        Question::create([
+            'test_id' => $freeSscChild2->id,
+            'subject_id' => $subjEnglish->id,
+            'question_text' => 'Fill in the blank with appropriate preposition: "She has been suffering from fever _____ Monday last."',
+            'options' => [
+                'a' => 'for',
+                'b' => 'since',
+                'c' => 'from',
+                'd' => 'by',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 0.50,
+            'explanation' => 'In present perfect continuous tense, "since" denotes a specific point in time (point of beginning), whereas "for" denotes a duration.',
+        ]);
+
+        // ========================================================
+        // Questions for Standalone Free Test: NEET Biology Rapid Quiz
+        // ========================================================
+        Question::create([
+            'test_id' => $testFreeBiology->id,
+            'subject_id' => $subjBiology->id,
+            'question_text' => 'Which blood vessel carries oxygenated blood from the lungs into the left atrium of the human heart?',
+            'options' => [
+                'a' => 'Pulmonary Artery',
+                'b' => 'Pulmonary Vein',
+                'c' => 'Coronary Sinus',
+                'd' => 'Superior Vena Cava',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'The pulmonary vein is an exception among veins; it carries freshly oxygenated blood from lungs back into the heart\'s left atrium.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeBiology->id,
+            'subject_id' => $subjBiology->id,
+            'question_text' => 'The functional unit of the human kidney where filtration of blood occurs is called:',
+            'options' => [
+                'a' => 'Neuron',
+                'b' => 'Nephron',
+                'c' => 'Alveolus',
+                'd' => 'Glomerulus capsule',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'The nephron is the structural and functional microscopic filtration unit of the kidney. Each human kidney contains ~1 million nephrons.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeBiology->id,
+            'subject_id' => $subjBiology->id,
+            'question_text' => 'Mendel\'s famous phenotypic dihybrid cross ratio in the F2 generation is:',
+            'options' => [
+                'a' => '3 : 1',
+                'b' => '1 : 2 : 1',
+                'c' => '9 : 3 : 3 : 1',
+                'd' => '9 : 7',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'In dihybrid inheritance with independent assortment, the F2 generation produces 9 round-yellow : 3 round-green : 3 wrinkled-yellow : 1 wrinkled-green.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeBiology->id,
+            'subject_id' => $subjBiology->id,
+            'question_text' => 'Which hormone is known as the "Emergency Hormone" or "Fight-or-Flight Hormone"?',
+            'options' => [
+                'a' => 'Insulin',
+                'b' => 'Thyroxine',
+                'c' => 'Adrenaline (Epinephrine)',
+                'd' => 'Glucagon',
+            ],
+            'correct_option' => 'c',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Adrenaline secreted by the adrenal medulla prepares the body to face stressful and emergency conditions.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeBiology->id,
+            'subject_id' => $subjBiology->id,
+            'question_text' => 'In DNA, adenine pairs with thymine via how many hydrogen bonds?',
+            'options' => [
+                'a' => '1 hydrogen bond',
+                'b' => '2 hydrogen bonds',
+                'c' => '3 hydrogen bonds',
+                'd' => 'Covalent peptide bond',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Adenine forms 2 hydrogen bonds with Thymine (A = T), while Guanine forms 3 hydrogen bonds with Cytosine (G ≡ C).',
+        ]);
+
+        // ========================================================
+        // Questions for Standalone Free Test: Vedic Maths Speed Test
+        // ========================================================
+        Question::create([
+            'test_id' => $testFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'question_text' => 'What is the product of 98 × 97 using the Vedic Maths Nikhilam (Base 100) sutra?',
+            'options' => [
+                'a' => '9506',
+                'b' => '9406',
+                'c' => '9606',
+                'd' => '9504',
+            ],
+            'correct_option' => 'a',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Base = 100. Deficiencies: -2 and -3. Left part: 98 - 3 = 95. Right part: (-2) × (-3) = 06. Result = 9506.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'question_text' => 'Using the Ekadhikena Purvena rule, what is the square of 75 (75²)?',
+            'options' => [
+                'a' => '5425',
+                'b' => '5625',
+                'c' => '5825',
+                'd' => '5725',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'For numbers ending in 5: Left = 7 × (7 + 1) = 7 × 8 = 56. Right = 5² = 25. Together = 5625.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'question_text' => 'Multiply 42 × 11 in mind using the Vedic 11-Multiplication rule:',
+            'options' => [
+                'a' => '452',
+                'b' => '462',
+                'c' => '472',
+                'd' => '482',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => 'Keep outer digits 4 and 2. Sum middle: 4 + 2 = 6. Insert between them: 462.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'question_text' => 'What is 15% of 480 calculated mentally?',
+            'options' => [
+                'a' => '68',
+                'b' => '72',
+                'c' => '76',
+                'd' => '80',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => '10% of 480 = 48. 5% of 480 = half of 48 = 24. 15% = 48 + 24 = 72.',
+        ]);
+
+        Question::create([
+            'test_id' => $testFreeVedicMath->id,
+            'subject_id' => $subjMathematics->id,
+            'question_text' => 'What is the square root of 5184 (√5184)?',
+            'options' => [
+                'a' => '68',
+                'b' => '72',
+                'c' => '78',
+                'd' => '82',
+            ],
+            'correct_option' => 'b',
+            'marks' => 4.00,
+            'negative_marks' => 1.00,
+            'explanation' => '70² = 4900, 80² = 6400. 5184 ends in 4, so unit digit is 2 or 8. Since 5184 is closer to 4900 than 6400, √5184 = 72.',
         ]);
 
 

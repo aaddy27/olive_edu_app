@@ -51,15 +51,24 @@ class TestAttemptController extends Controller
     {
         $request->validate([
             'question_id' => 'required|integer',
-            'answer' => 'required|string',
+            'answer' => 'nullable|string',
+            'selected_option' => 'nullable|string',
         ]);
+
+        $answer = $request->input('answer', $request->input('selected_option'));
+        if ($answer === null || $answer === '') {
+            return response()->json([
+                'success' => false,
+                'message' => 'The answer or selected_option field is required.'
+            ], 422);
+        }
 
         $attempt = TestAttempt::where('id', $id)
             ->where('user_id', Auth::id())
             ->firstOrFail();
 
         try {
-            $this->testService->saveAnswer($attempt, $request->question_id, $request->answer);
+            $this->testService->saveAnswer($attempt, $request->question_id, $answer);
             return response()->json([
                 'success' => true,
                 'message' => 'Answer saved successfully',

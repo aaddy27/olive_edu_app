@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Fallback login route for standard Laravel auth redirection
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
+
 // One-click server database seeder endpoint
 Route::get('/seed-dummy-data', function () {
     if (request('secret') !== 'olive2026') {
