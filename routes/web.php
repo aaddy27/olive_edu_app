@@ -19,6 +19,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// One-click server database seeder endpoint
+Route::get('/seed-dummy-data', function () {
+    if (request('secret') !== 'olive2026') {
+        return response()->json(['error' => 'Unauthorized. Pass ?secret=olive2026'], 403);
+    }
+
+    try {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Complete dummy data seeded successfully on server!',
+            'details' => explode("\n", trim(\Illuminate\Support\Facades\Artisan::output()))
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 'error',
+            'message' => $e->getMessage()
+        ], 500);
+    }
+});
+
 // Admin Panel Routes
 Route::prefix('admin')->name('admin.')->group(function () {
     // Guest routes (login)
