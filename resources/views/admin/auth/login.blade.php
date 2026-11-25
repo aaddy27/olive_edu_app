@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en" class="h-full bg-white">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,46 +38,87 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-image: url("/images/login-bg.jpg");
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
         }
     </style>
 </head>
-<body class="min-h-full flex flex-col justify-between antialiased text-slate-800 bg-slate-900/10 selection:bg-indigo-500 selection:text-white">
-    
-    <!-- Top Floating Header -->
-    <header class="pt-6 px-4 sm:px-8 max-w-7xl w-full mx-auto">
-        <div class="bg-white/85 backdrop-blur-md rounded-2xl border border-white/70 shadow-xs px-5 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="h-10 w-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
-                    <span class="material-symbols-rounded text-2xl">school</span>
+<body class="h-full antialiased text-slate-800 bg-slate-50 selection:bg-indigo-500 selection:text-white">
+
+    <div class="min-h-full flex flex-col lg:flex-row">
+        
+        <!-- Left Showcase Side (Hero Educational Illustration & Branding) -->
+        <div class="relative hidden lg:flex lg:w-1/2 xl:w-7/12 flex-col justify-between p-12 overflow-hidden bg-slate-900">
+            <!-- Background Image -->
+            <img 
+                src="/images/login-bg.jpg" 
+                alt="Olive Learnings Campus" 
+                class="absolute inset-0 h-full w-full object-cover object-center"
+            >
+            <!-- Elegant Depth & Contrast Overlays -->
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-slate-900/30"></div>
+            <div class="absolute inset-0 bg-indigo-950/10 mix-blend-multiply"></div>
+
+            <!-- Top Brand Emblem Over Image -->
+            <div class="relative z-10 flex items-center gap-3.5">
+                <div class="h-11 w-11 rounded-2xl bg-white/95 backdrop-blur-md text-indigo-600 flex items-center justify-center shadow-lg border border-white/40">
+                    <span class="material-symbols-rounded text-2xl font-bold">school</span>
                 </div>
                 <div>
-                    <span class="font-bold text-base sm:text-lg text-slate-900 tracking-tight leading-none block">Olive Learnings</span>
-                    <span class="text-[11px] text-slate-500 font-medium mt-0.5 block">Admin Management Console</span>
+                    <span class="text-xl font-bold text-white tracking-tight drop-shadow-md">Olive Learnings</span>
+                    <span class="block text-xs font-medium text-slate-200 drop-shadow-sm">Empowering Next-Gen Education</span>
                 </div>
             </div>
-            <a href="mailto:support@olivelearnings.com" class="text-xs font-semibold text-slate-600 hover:text-indigo-600 transition flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-slate-100/70">
-                <span class="material-symbols-rounded text-base text-slate-500">support</span>
-                <span class="hidden sm:inline">Need Help?</span>
-            </a>
-        </div>
-    </header>
 
-    <!-- Main Auth Card Container -->
-    <main class="flex-1 flex items-center justify-center px-4 py-8 sm:px-6">
-        <div class="w-full max-w-[420px]">
+            <!-- Bottom Value Proposition Card Over Image -->
+            <div class="relative z-10 max-w-lg">
+                <div class="bg-slate-900/40 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-white shadow-2xl">
+                    <div class="flex items-center gap-2 mb-2 text-indigo-300 text-xs font-bold uppercase tracking-wider">
+                        <span class="material-symbols-rounded text-sm">verified</span>
+                        <span>Unified Management Console</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug">
+                        Seamless learning, assessment, and student progress tracking.
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed">
+                        Manage test series, multiple-choice item banks, video courses, and student performance from a single centralized dashboard.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side (Authentication Form) -->
+        <div class="flex-1 flex flex-col justify-between p-6 sm:p-10 lg:p-12 xl:p-16 bg-white min-h-screen lg:min-h-full">
             
-            <!-- Frosted Glass Card Container -->
-            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-7 sm:p-9 shadow-[0_20px_50px_rgba(15,23,42,0.12)] border border-white/80">
+            <!-- Mobile Top Header (Visible on small screens) -->
+            <div class="flex items-center justify-between lg:hidden mb-8">
+                <div class="flex items-center gap-2.5">
+                    <div class="h-9 w-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-xs">
+                        <span class="material-symbols-rounded text-xl">school</span>
+                    </div>
+                    <span class="font-bold text-slate-900 text-base">Olive Learnings</span>
+                </div>
+                <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-lg text-slate-600">Admin</span>
+            </div>
+
+            <!-- Desktop Spacer -->
+            <div class="hidden lg:block"></div>
+
+            <!-- Form Center Wrapper -->
+            <div class="w-full max-w-sm mx-auto my-auto py-8">
                 
-                <!-- Heading -->
-                <div class="mb-6">
-                    <h1 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">Sign in</h1>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Please enter your admin credentials to continue</p>
+                <!-- Desktop Brand Pill -->
+                <div class="hidden lg:inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-bold mb-6">
+                    <span class="h-1.5 w-1.5 rounded-full bg-indigo-600"></span>
+                    <span>Admin Portal</span>
+                </div>
+
+                <!-- Header Title -->
+                <div class="mb-8">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                        Sign in to console
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1.5">
+                        Please enter your administrator credentials below
+                    </p>
                 </div>
 
                 <!-- Error Alert -->
@@ -90,13 +131,14 @@
                     </div>
                 @endif
 
+                <!-- Login Form -->
                 <form method="POST" action="{{ route('admin.login') }}" class="space-y-4">
                     @csrf
 
                     <!-- Email Field -->
                     <div>
                         <label for="email" class="block text-xs font-bold text-slate-700 mb-1.5">
-                            Email address
+                            Administrator Email
                         </label>
                         <div class="relative">
                             <input 
@@ -144,7 +186,7 @@
                     </div>
 
                     <!-- Remember Me -->
-                    <div class="flex items-center pt-1">
+                    <div class="flex items-center justify-between pt-1">
                         <label class="flex items-center gap-2 cursor-pointer select-none">
                             <input 
                                 id="remember" 
@@ -161,35 +203,34 @@
                         type="submit" 
                         class="w-full h-11 mt-2 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:scale-[0.99] transition shadow-sm shadow-indigo-200 flex items-center justify-center gap-2"
                     >
-                        <span>Sign In to Admin</span>
+                        <span>Sign In to Console</span>
                         <span class="material-symbols-rounded text-lg">arrow_forward</span>
                     </button>
                 </form>
 
+                <!-- Security Trust Note -->
+                <div class="mt-6 text-center text-xs text-slate-400 flex items-center justify-center gap-1.5 font-medium">
+                    <span class="material-symbols-rounded text-slate-400 text-base">lock</span>
+                    <span>256-bit encrypted administrator session</span>
+                </div>
+
             </div>
 
-            <!-- Security Trust Note -->
-            <div class="mt-4 text-center text-xs text-slate-600 flex items-center justify-center gap-1.5 font-medium drop-shadow-xs">
-                <span class="material-symbols-rounded text-slate-600 text-base">lock</span>
-                <span>Encrypted & secure session</span>
+            <!-- Bottom Footer Links -->
+            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+                <p>© {{ date('Y') }} Olive Learnings. All rights reserved.</p>
+                <div class="flex items-center gap-4 text-slate-500 font-medium">
+                    <a href="mailto:support@olivelearnings.com" class="hover:text-slate-800 transition">Support</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-slate-800 transition">Privacy</a>
+                    <span>•</span>
+                    <a href="#" class="hover:text-slate-800 transition">Terms</a>
+                </div>
             </div>
 
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="pb-6 px-4 max-w-7xl w-full mx-auto">
-        <div class="bg-white/80 backdrop-blur-md rounded-2xl border border-white/70 shadow-2xs px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-            <p>© {{ date('Y') }} Olive Learnings. All rights reserved.</p>
-            <div class="flex items-center gap-4 text-slate-600 font-medium">
-                <a href="#" class="hover:text-indigo-600 transition">Privacy</a>
-                <span>•</span>
-                <a href="#" class="hover:text-indigo-600 transition">Terms</a>
-                <span>•</span>
-                <a href="#" class="hover:text-indigo-600 transition">Support</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
     <!-- Password toggle script -->
     <script>
