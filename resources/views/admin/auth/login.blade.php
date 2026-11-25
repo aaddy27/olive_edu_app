@@ -38,7 +38,7 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-image: url("{{ asset('images/login-bg.jpg') }}");
+            background-image: url("/images/login-bg.jpg");
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
