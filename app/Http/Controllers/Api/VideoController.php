@@ -18,7 +18,7 @@ class VideoController extends Controller
     {
         try {
             $user = Auth::user();
-            $video = Video::with('course')->findOrFail($id);
+            $video = Video::forStudents()->with('course')->findOrFail($id);
 
             // If video is free, anyone can watch (even without purchase)
             if ($video->is_free) {

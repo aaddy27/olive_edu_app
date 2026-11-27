@@ -8,14 +8,17 @@ The application supports an **Institute & Teacher Management Ecosystem**:
    - Automatically generates unique institute codes (no manual entry required).
    - Manages **Institute Validity** (Lifetime Access or custom Expiry Date).
    - If an Institute is marked **Inactive**, its Institute Admin and all teachers are **automatically deactivated** and their mobile app login tokens are revoked.
-   - Creates & publishes **Courses**, **Subjects**, **Playlists**, and **Videos** (`/admin/courses`, `/admin/subjects`, `/admin/playlists`, `/admin/videos`).
+   - **Complete Content Separation**:
+     - **Student Content**: Uploaded via `/admin/courses`, `/admin/subjects`, `/admin/playlists`, `/admin/videos` (only visible to student app users).
+     - **Teacher / Institute Content**: Uploaded via `/admin/institute-courses`, `/admin/institute-subjects`, `/admin/institute-playlists`, `/admin/institute-videos` (only visible to institute teachers).
 2. **Institute Admin (Mobile App / API Only)**:
    - Logs into the mobile app using their email/phone and password.
    - **Blocked from Web Admin Portal**: Institute Admins cannot log into the web admin portal (`/admin/login`).
    - Adds, views, updates, activates/deactivates, and removes **Teachers & Staff** under their institute.
 3. **Institute Teachers (Mobile App / API Only)**:
    - Logs into the mobile app using credentials set by their Institute Admin.
-   - Gets **100% Free Access** to all Courses, Subjects, Playlists, and Video Streaming published by the Main Admin (no payment/purchase barrier).
+   - Gets **100% Free Access** to all Teacher Courses, Subjects, Playlists, and Video Streaming published by the Main Admin.
+   - Strictly isolated from student content: teachers do not see student courses, and students do not see teacher courses.
 
 ---
 

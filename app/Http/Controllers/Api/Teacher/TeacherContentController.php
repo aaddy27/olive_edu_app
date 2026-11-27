@@ -16,7 +16,7 @@ class TeacherContentController extends Controller
      */
     public function courses(Request $request)
     {
-        $query = Course::with(['examBoard', 'subjects'])
+        $query = Course::forTeachers()->with(['examBoard', 'subjects'])
             ->withCount(['videos', 'playlists'])
             ->published();
 
@@ -69,8 +69,12 @@ class TeacherContentController extends Controller
      */
     public function courseDetails($id)
     {
-        $course = Course::with(['examBoard', 'subjects', 'playlists.videos', 'videos' => function ($q) {
-            $q->whereNull('playlist_id'); // Standalone videos
+        $course = Course::forTeachers()->with(['examBoard', 'subjects', 'playlists' => function($q) {
+            $q->forTeachers()->with(['videos' => function($vq) {
+                $vq->forTeachers()->orderBy('sort_order');
+            }]);
+        }, 'videos' => function ($q) {
+            $q->forTeachers()->whereNull('playlist_id'); // Standalone videos
         }])
         ->where('is_published', true)
         ->find($id);
@@ -139,31 +143,31 @@ class TeacherContentController extends Controller
      */
     public function subjectContent($courseId, $subjectId)
     {
-        $course = Course::published()->find($courseId);
+        $course = Course::forTeachers()->published()->find($courseId);
         if (!$course) {
             return response()->json(['success' => false, 'message' => 'Course not found'], 404);
         }
 
-        $subject = Subject::find($subjectId);
+        $subject = Subject::forTeachers()->find($subjectId);
         if (!$subject) {
             return response()->json(['success' => false, 'message' => 'Subject not found'], 404);
         }
 
         // Get playlists for this course and subject
-        $playlists = Playlist::where('course_id', $courseId)
+        $playlists = Playlist::forTeachers()->where('course_id', $courseId)
             ->where(function ($q) use ($subjectId) {
                 $q->where('subject_id', $subjectId)
                   ->orWhereNull('subject_id');
             })
             ->where('is_active', true)
             ->with(['videos' => function ($q) {
-                $q->orderBy('sort_order');
+                $q->forTeachers()->orderBy('sort_order');
             }])
             ->orderBy('sort_order')
             ->get();
 
         // Get standalone videos for this course and subject
-        $standaloneVideos = Video::where('course_id', $courseId)
+        $standaloneVideos = Video::forTeachers()->where('course_id', $courseId)
             ->where('subject_id', $subjectId)
             ->whereNull('playlist_id')
             ->orderBy('sort_order')
@@ -222,8 +226,8 @@ class TeacherContentController extends Controller
      */
     public function playlistDetails($id)
     {
-        $playlist = Playlist::with(['course', 'subject', 'videos' => function ($q) {
-            $q->orderBy('sort_order');
+        $playlist = Playlist::forTeachers()->with(['course', 'subject', 'videos' => function ($q) {
+            $q->forTeachers()->orderBy('sort_order');
         }])
         ->where('is_active', true)
         ->find($id);
@@ -273,7 +277,7 @@ class TeacherContentController extends Controller
      */
     public function videoDetails($id)
     {
-        $video = Video::with(['course', 'subject', 'playlist'])->find($id);
+        $video = Video::forTeachers()->with(['course', 'subject', 'playlist'])->find($id);
 
         if (!$video) {
             return response()->json([

@@ -11,6 +11,7 @@ class Subject extends Model
     use HasFactory;
 
     protected $fillable = [
+        'target_audience',
         'exam_id',
         'name',
         'slug',
@@ -69,5 +70,15 @@ class Subject extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function scopeForStudents($query)
+    {
+        return $query->where('target_audience', 'student');
+    }
+
+    public function scopeForTeachers($query)
+    {
+        return $query->where('target_audience', 'teacher');
     }
 }

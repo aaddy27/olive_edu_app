@@ -16,7 +16,7 @@ class CourseController extends Controller
     public function index(Request $request)
     {
         try {
-            $query = Course::with(['examBoard', 'subjects', 'videos'])
+            $query = Course::forStudents()->with(['examBoard', 'subjects', 'videos'])
                 ->published();
 
             // Filter by exam_id
@@ -76,7 +76,7 @@ class CourseController extends Controller
     public function show($slug)
     {
         try {
-            $course = Course::with(['examBoard', 'subjects', 'videos'])
+            $course = Course::forStudents()->with(['examBoard', 'subjects', 'videos'])
                 ->published()
                 ->where('slug', $slug)
                 ->firstOrFail();
@@ -148,7 +148,9 @@ class CourseController extends Controller
     public function videos(Request $request, $id)
     {
         try {
-            $course = Course::with(['videos.subject'])->findOrFail($id);
+            $course = Course::forStudents()->with(['videos' => function($q) {
+                $q->forStudents()->with('subject');
+            }])->findOrFail($id);
 
             // Check if user is logged in and has purchased this course
             $hasPurchased = false;

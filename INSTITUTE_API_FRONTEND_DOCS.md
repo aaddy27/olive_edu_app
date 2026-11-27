@@ -20,7 +20,11 @@
 2. **Institute Teacher (`teacher`)**:
    - Added by their Institute Admin via the app.
    - Logs in via Email or Mobile Number + Password.
-   - Gets **100% Free Access** to all Courses, Subjects, Playlists, and Video Lessons uploaded by the Super Admin.
+   - Gets **100% Free Access** to all Courses, Subjects, Playlists, and Video Lessons created for Teachers.
+   - **Complete Content Isolation**:
+     - Teachers ONLY see **Teacher Content** (`target_audience = 'teacher'`).
+     - Teachers will NEVER see Student courses, exam prep content, or student test series.
+     - Students will NEVER see Teacher courses, teaching methodologies, or teacher training videos.
    - **No payment, no purchase, and no view restrictions**.
 
 ### Status & Validity Rules

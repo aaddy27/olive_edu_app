@@ -11,6 +11,7 @@ class Playlist extends Model
     use HasFactory;
 
     protected $fillable = [
+        'target_audience',
         'course_id',
         'subject_id',
         'title',
@@ -68,5 +69,15 @@ class Playlist extends Model
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
+    }
+
+    public function scopeForStudents($query)
+    {
+        return $query->where('target_audience', 'student');
+    }
+
+    public function scopeForTeachers($query)
+    {
+        return $query->where('target_audience', 'teacher');
     }
 }

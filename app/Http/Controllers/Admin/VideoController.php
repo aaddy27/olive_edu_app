@@ -15,7 +15,7 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::with(['course', 'subject', 'playlist'])
+        $videos = Video::forStudents()->with(['course', 'subject', 'playlist'])
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
@@ -24,9 +24,9 @@ class VideoController extends Controller
 
     public function create()
     {
-        $courses = Course::where('is_published', true)->get();
-        $subjects = Subject::where('is_active', true)->get();
-        $playlists = Playlist::where('is_active', true)->get();
+        $courses = Course::forStudents()->where('is_published', true)->get();
+        $subjects = Subject::forStudents()->where('is_active', true)->get();
+        $playlists = Playlist::forStudents()->where('is_active', true)->get();
 
         return view('admin.videos.create', compact('courses', 'subjects', 'playlists'));
     }
@@ -50,6 +50,7 @@ class VideoController extends Controller
 
         // Prepare data for Video model
         $videoData = [
+            'target_audience' => 'student',
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'course_id' => $validated['course_id'],
@@ -91,9 +92,9 @@ class VideoController extends Controller
 
     public function edit(Video $video)
     {
-        $courses = Course::where('is_published', true)->get();
-        $subjects = Subject::where('is_active', true)->get();
-        $playlists = Playlist::where('is_active', true)->get();
+        $courses = Course::forStudents()->where('is_published', true)->get();
+        $subjects = Subject::forStudents()->where('is_active', true)->get();
+        $playlists = Playlist::forStudents()->where('is_active', true)->get();
 
         return view('admin.videos.edit', compact('video', 'courses', 'subjects', 'playlists'));
     }
@@ -117,6 +118,7 @@ class VideoController extends Controller
 
         // Prepare data for Video model
         $videoData = [
+            'target_audience' => 'student',
             'title' => $validated['title'],
             'description' => $validated['description'] ?? null,
             'course_id' => $validated['course_id'],

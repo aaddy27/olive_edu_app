@@ -79,9 +79,12 @@
                         </div>
                     </div>
 
-                    <!-- Academics Section -->
+                    <!-- Academics Section (Student Portal) -->
                     <div>
-                        <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Academics</div>
+                        <div class="px-3 mb-2 flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Student Portal</span>
+                            <span class="text-[9px] font-bold text-indigo-500 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">STUDENTS</span>
+                        </div>
                         <div class="space-y-1">
                             <a href="{{ route('admin.exam-boards.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.exam-boards.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.exam-boards.*') ? 'text-white' : 'text-slate-400' }}">account_balance</span>
@@ -95,28 +98,22 @@
 
                             <a href="{{ route('admin.subjects.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.subjects.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.subjects.*') ? 'text-white' : 'text-slate-400' }}">auto_stories</span>
-                                <span>Subjects</span>
+                                <span>Subjects (Student)</span>
                             </a>
 
                             <a href="{{ route('admin.courses.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.courses.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.courses.*') ? 'text-white' : 'text-slate-400' }}">layers</span>
-                                <span>Courses</span>
+                                <span>Courses (Student)</span>
                             </a>
-                        </div>
-                    </div>
 
-                    <!-- Content & Assessment Section -->
-                    <div>
-                        <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Content & Exams</div>
-                        <div class="space-y-1">
                             <a href="{{ route('admin.playlists.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.playlists.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.playlists.*') ? 'text-white' : 'text-slate-400' }}">playlist_play</span>
-                                <span>Playlists</span>
+                                <span>Playlists (Student)</span>
                             </a>
 
                             <a href="{{ route('admin.videos.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.videos.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.videos.*') ? 'text-white' : 'text-slate-400' }}">smart_display</span>
-                                <span>Videos</span>
+                                <span>Videos (Student)</span>
                             </a>
 
                             <a href="{{ route('admin.tests.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.tests.*') || request()->routeIs('admin.tests.questions.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
@@ -126,15 +123,44 @@
                         </div>
                     </div>
 
-                    <!-- Operations Section -->
+                    <!-- Institute & Teacher Platform Section -->
                     <div>
-                        <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Operations</div>
+                        <div class="px-3 mb-2 flex items-center justify-between">
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Teacher Platform</span>
+                            <span class="text-[9px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200">TEACHERS ONLY</span>
+                        </div>
                         <div class="space-y-1">
                             <a href="{{ route('admin.institutes.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institutes.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.institutes.*') ? 'text-white' : 'text-slate-400' }}">corporate_fare</span>
                                 <span>Institutes</span>
                             </a>
 
+                            <a href="{{ route('admin.institute-courses.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institute-courses.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.institute-courses.*') ? 'text-white' : 'text-slate-400' }}">school</span>
+                                <span>Teacher Courses</span>
+                            </a>
+
+                            <a href="{{ route('admin.institute-subjects.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institute-subjects.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.institute-subjects.*') ? 'text-white' : 'text-slate-400' }}">menu_book</span>
+                                <span>Teacher Subjects</span>
+                            </a>
+
+                            <a href="{{ route('admin.institute-playlists.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institute-playlists.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.institute-playlists.*') ? 'text-white' : 'text-slate-400' }}">video_library</span>
+                                <span>Teacher Playlists</span>
+                            </a>
+
+                            <a href="{{ route('admin.institute-videos.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institute-videos.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.institute-videos.*') ? 'text-white' : 'text-slate-400' }}">live_tv</span>
+                                <span>Teacher Videos</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Operations Section -->
+                    <div>
+                        <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Operations & Users</div>
+                        <div class="space-y-1">
                             <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.users.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.users.*') ? 'text-white' : 'text-slate-400' }}">group</span>
                                 <span>Users</span>

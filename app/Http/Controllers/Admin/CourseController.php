@@ -13,14 +13,14 @@ class CourseController extends Controller
 {
     public function index()
     {
-        $courses = Course::with('examBoard', 'subjects')->latest()->paginate(10);
+        $courses = Course::forStudents()->with('examBoard', 'subjects')->latest()->paginate(10);
         return view('admin.courses.index', compact('courses'));
     }
 
     public function create()
     {
         $examBoards = ExamBoard::where('is_active', true)->get();
-        $subjects = Subject::with('exam')->where('is_active', true)->get();
+        $subjects = Subject::forStudents()->with('exam')->where('is_active', true)->get();
         return view('admin.courses.create', compact('examBoards', 'subjects'));
     }
 
@@ -47,6 +47,7 @@ class CourseController extends Controller
         $validated['slug'] = Str::slug($validated['title']);
         $validated['is_published'] = $request->has('is_published');
         $validated['created_by'] = Auth::id();
+        $validated['target_audience'] = 'student';
 
         $course = Course::create($validated);
         
@@ -64,7 +65,7 @@ class CourseController extends Controller
     public function edit(Course $course)
     {
         $examBoards = ExamBoard::where('is_active', true)->get();
-        $subjects = Subject::with('exam')->where('is_active', true)->get();
+        $subjects = Subject::forStudents()->with('exam')->where('is_active', true)->get();
         $selectedSubjects = $course->subjects->pluck('id')->toArray();
         return view('admin.courses.edit', compact('course', 'examBoards', 'subjects', 'selectedSubjects'));
     }

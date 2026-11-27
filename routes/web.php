@@ -14,6 +14,10 @@ use App\Http\Controllers\Admin\{
     QuestionController,
     UserController,
     InstituteController,
+    InstituteCourseController,
+    InstituteSubjectController,
+    InstitutePlaylistController,
+    InstituteVideoController,
     PurchaseController
 };
 
@@ -92,9 +96,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
         });
         
-        // Institutes
+        // Institutes & Teacher Platform
         Route::post('institutes/{institute}/toggle-status', [InstituteController::class, 'toggleStatus'])->name('institutes.toggle-status');
         Route::resource('institutes', InstituteController::class);
+        Route::resource('institute-courses', InstituteCourseController::class);
+        Route::resource('institute-subjects', InstituteSubjectController::class);
+        Route::resource('institute-playlists', InstitutePlaylistController::class);
+        Route::resource('institute-videos', InstituteVideoController::class);
 
         // Users
         Route::resource('users', UserController::class);

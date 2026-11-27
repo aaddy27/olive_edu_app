@@ -11,6 +11,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
+        'target_audience',
         'exam_board_id',
         'title',
         'slug',
@@ -95,6 +96,16 @@ class Course extends Model
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
+    }
+
+    public function scopeForStudents($query)
+    {
+        return $query->where('target_audience', 'student');
+    }
+
+    public function scopeForTeachers($query)
+    {
+        return $query->where('target_audience', 'teacher');
     }
 
     public function scopeFree($query)

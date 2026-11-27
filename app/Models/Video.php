@@ -10,6 +10,7 @@ class Video extends Model
     use HasFactory;
 
     protected $fillable = [
+        'target_audience',
         'subject_id',
         'course_id',
         'playlist_id',
@@ -66,6 +67,16 @@ class Video extends Model
     public function scopePreview($query)
     {
         return $query->where('is_preview', true);
+    }
+
+    public function scopeForStudents($query)
+    {
+        return $query->where('target_audience', 'student');
+    }
+
+    public function scopeForTeachers($query)
+    {
+        return $query->where('target_audience', 'teacher');
     }
 
     public function canView(User $user): bool

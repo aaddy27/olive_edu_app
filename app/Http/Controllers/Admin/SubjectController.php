@@ -11,7 +11,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $subjects = Subject::with('exam.examBoard')->latest()->paginate(10);
+        $subjects = Subject::forStudents()->with('exam.examBoard')->latest()->paginate(10);
         return view('admin.subjects.index', compact('subjects'));
     }
 
@@ -32,6 +32,7 @@ class SubjectController extends Controller
 
         $validated['slug'] = Str::slug($validated['name']);
         $validated['is_active'] = $request->has('is_active');
+        $validated['target_audience'] = 'student';
 
         Subject::create($validated);
 

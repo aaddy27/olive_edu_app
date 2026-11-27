@@ -14,7 +14,7 @@ class PlaylistController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Playlist::with(['course', 'subject'])->withCount('videos');
+        $query = Playlist::forStudents()->with(['course', 'subject'])->withCount('videos');
 
         if ($request->filled('course_id')) {
             $query->where('course_id', $request->course_id);
@@ -25,15 +25,15 @@ class PlaylistController extends Controller
         }
 
         $playlists = $query->orderBy('sort_order')->latest()->paginate(15)->withQueryString();
-        $courses = Course::where('is_published', true)->get();
+        $courses = Course::forStudents()->where('is_published', true)->get();
 
         return view('admin.playlists.index', compact('playlists', 'courses'));
     }
 
     public function create()
     {
-        $courses = Course::with('subjects')->where('is_published', true)->get();
-        $subjects = Subject::where('is_active', true)->get();
+        $courses = Course::forStudents()->with('subjects')->where('is_published', true)->get();
+        $subjects = Subject::forStudents()->where('is_active', true)->get();
 
         return view('admin.playlists.create', compact('courses', 'subjects'));
     }
@@ -56,6 +56,7 @@ class PlaylistController extends Controller
         }
 
         Playlist::create([
+            'target_audience' => 'student',
             'course_id' => $validated['course_id'],
             'subject_id' => $validated['subject_id'] ?? null,
             'title' => $validated['title'],
@@ -72,8 +73,8 @@ class PlaylistController extends Controller
 
     public function edit(Playlist $playlist)
     {
-        $courses = Course::with('subjects')->where('is_published', true)->get();
-        $subjects = Subject::where('is_active', true)->get();
+        $courses = Course::forStudents()->with('subjects')->where('is_published', true)->get();
+        $subjects = Subject::forStudents()->where('is_active', true)->get();
 
         return view('admin.playlists.edit', compact('playlist', 'courses', 'subjects'));
     }
