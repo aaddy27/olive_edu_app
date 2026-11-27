@@ -19,11 +19,14 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'institute_id',
         'name',
         'email',
         'phone',
         'password',
         'role',
+        'designation',
+        'employee_id',
         'is_active',
         'city',
         'state',
@@ -66,11 +69,35 @@ class User extends Authenticatable
     }
 
     /**
+     * Check if user is institute admin
+     */
+    public function isInstituteAdmin(): bool
+    {
+        return $this->role === 'institute_admin';
+    }
+
+    /**
+     * Check if user is teacher
+     */
+    public function isTeacher(): bool
+    {
+        return $this->role === 'teacher';
+    }
+
+    /**
      * Check if user is student
      */
     public function isStudent(): bool
     {
         return $this->role === 'student';
+    }
+
+    /**
+     * Get user's institute
+     */
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class);
     }
 
     /**

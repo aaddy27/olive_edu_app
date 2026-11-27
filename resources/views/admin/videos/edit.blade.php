@@ -62,7 +62,8 @@
             </div>
 
             <!-- Course and Subject in 2 cols -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Course, Subject and Playlist in grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <label for="course_id" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
                         Course <span class="text-rose-500">*</span>
@@ -103,6 +104,27 @@
                         @endforeach
                     </select>
                     @error('subject_id')
+                        <p class="mt-1 text-xs text-rose-600 font-medium">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="playlist_id" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-2">
+                        Playlist (Optional)
+                    </label>
+                    <select 
+                        name="playlist_id" 
+                        id="playlist_id" 
+                        class="w-full h-11 px-3.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition shadow-2xs"
+                    >
+                        <option value="">No Playlist (Standalone)</option>
+                        @foreach($playlists as $playlist)
+                            <option value="{{ $playlist->id }}" {{ old('playlist_id', $video->playlist_id) == $playlist->id ? 'selected' : '' }}>
+                                {{ $playlist->title }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error('playlist_id')
                         <p class="mt-1 text-xs text-rose-600 font-medium">{{ $message }}</p>
                     @enderror
                 </div>

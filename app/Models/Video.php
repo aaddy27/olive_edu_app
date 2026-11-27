@@ -12,6 +12,7 @@ class Video extends Model
     protected $fillable = [
         'subject_id',
         'course_id',
+        'playlist_id',
         'title',
         'description',
         'vimeo_video_id',
@@ -45,6 +46,11 @@ class Video extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function playlist()
+    {
+        return $this->belongsTo(Playlist::class);
     }
 
     public function viewLimits()

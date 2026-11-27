@@ -21,9 +21,10 @@ class AdminMiddleware
         }
 
         if (Auth::user()->role !== 'admin') {
+            $isInstitute = in_array(Auth::user()->role, ['institute_admin', 'teacher']);
             Auth::logout();
             return redirect()->route('admin.login')
-                ->withErrors(['email' => 'You are not authorized to access this area.']);
+                ->withErrors(['email' => $isInstitute ? 'Access Denied: Institute accounts can only access via the Mobile Application.' : 'You are not authorized to access this area.']);
         }
 
         return $next($request);

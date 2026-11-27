@@ -109,6 +109,11 @@
                     <div>
                         <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Content & Exams</div>
                         <div class="space-y-1">
+                            <a href="{{ route('admin.playlists.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.playlists.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.playlists.*') ? 'text-white' : 'text-slate-400' }}">playlist_play</span>
+                                <span>Playlists</span>
+                            </a>
+
                             <a href="{{ route('admin.videos.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.videos.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.videos.*') ? 'text-white' : 'text-slate-400' }}">smart_display</span>
                                 <span>Videos</span>
@@ -125,6 +130,11 @@
                     <div>
                         <div class="px-3 mb-2 text-[11px] font-bold text-slate-400 uppercase tracking-wider">Operations</div>
                         <div class="space-y-1">
+                            <a href="{{ route('admin.institutes.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.institutes.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
+                                <span class="material-symbols-rounded {{ request()->routeIs('admin.institutes.*') ? 'text-white' : 'text-slate-400' }}">corporate_fare</span>
+                                <span>Institutes</span>
+                            </a>
+
                             <a href="{{ route('admin.users.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all {{ request()->routeIs('admin.users.*') ? 'bg-indigo-600 text-white shadow-md shadow-indigo-200' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900' }}">
                                 <span class="material-symbols-rounded {{ request()->routeIs('admin.users.*') ? 'text-white' : 'text-slate-400' }}">group</span>
                                 <span>Users</span>
@@ -319,6 +329,21 @@
             if (countElementId) {
                 const countEl = document.getElementById(countElementId);
                 if (countEl) countEl.textContent = visibleCount;
+            }
+        };
+
+        // Global password visibility toggle
+        window.togglePasswordVisibility = function(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            if (!input || !icon) return;
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
             }
         };
     </script>

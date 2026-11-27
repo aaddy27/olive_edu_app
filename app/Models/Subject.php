@@ -51,6 +51,11 @@ class Subject extends Model
         return $this->hasMany(Video::class);
     }
 
+    public function playlists()
+    {
+        return $this->hasMany(Playlist::class)->orderBy('sort_order');
+    }
+
     public function notes()
     {
         return $this->hasMany(SubjectNote::class);

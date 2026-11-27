@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Video;
 use App\Models\Course;
 use App\Models\Subject;
+use App\Models\Playlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -14,7 +15,7 @@ class VideoController extends Controller
 {
     public function index()
     {
-        $videos = Video::with(['course', 'subject'])
+        $videos = Video::with(['course', 'subject', 'playlist'])
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
@@ -25,8 +26,9 @@ class VideoController extends Controller
     {
         $courses = Course::where('is_published', true)->get();
         $subjects = Subject::where('is_active', true)->get();
+        $playlists = Playlist::where('is_active', true)->get();
 
-        return view('admin.videos.create', compact('courses', 'subjects'));
+        return view('admin.videos.create', compact('courses', 'subjects', 'playlists'));
     }
 
     public function store(Request $request)
@@ -36,6 +38,7 @@ class VideoController extends Controller
             'description' => 'nullable|string',
             'course_id' => 'required|exists:courses,id',
             'subject_id' => 'required|exists:subjects,id',
+            'playlist_id' => 'nullable|exists:playlists,id',
             'video_url' => 'required|url',
             'thumbnail' => 'nullable|image|max:5120',
             'duration' => 'nullable|integer|min:0',
@@ -51,6 +54,7 @@ class VideoController extends Controller
             'description' => $validated['description'] ?? null,
             'course_id' => $validated['course_id'],
             'subject_id' => $validated['subject_id'],
+            'playlist_id' => $validated['playlist_id'] ?? null,
             'video_url' => $validated['video_url'],
             'duration_seconds' => $validated['duration'] ?? 0,
             'view_limit' => $validated['view_limit'] ?? 0,
@@ -89,8 +93,9 @@ class VideoController extends Controller
     {
         $courses = Course::where('is_published', true)->get();
         $subjects = Subject::where('is_active', true)->get();
+        $playlists = Playlist::where('is_active', true)->get();
 
-        return view('admin.videos.edit', compact('video', 'courses', 'subjects'));
+        return view('admin.videos.edit', compact('video', 'courses', 'subjects', 'playlists'));
     }
 
     public function update(Request $request, Video $video)
@@ -100,6 +105,7 @@ class VideoController extends Controller
             'description' => 'nullable|string',
             'course_id' => 'required|exists:courses,id',
             'subject_id' => 'required|exists:subjects,id',
+            'playlist_id' => 'nullable|exists:playlists,id',
             'video_url' => 'required|url',
             'thumbnail' => 'nullable|image|max:5120',
             'duration' => 'nullable|integer|min:0',
@@ -115,6 +121,7 @@ class VideoController extends Controller
             'description' => $validated['description'] ?? null,
             'course_id' => $validated['course_id'],
             'subject_id' => $validated['subject_id'],
+            'playlist_id' => $validated['playlist_id'] ?? null,
             'video_url' => $validated['video_url'],
             'duration_seconds' => $validated['duration'] ?? 0,
             'view_limit' => $validated['view_limit'] ?? 0,

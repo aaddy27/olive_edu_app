@@ -8,10 +8,12 @@ use App\Http\Controllers\Admin\{
     ExamController, 
     CourseController, 
     SubjectController,
+    PlaylistController,
     VideoController,
     TestController,
     QuestionController,
     UserController,
+    InstituteController,
     PurchaseController
 };
 
@@ -67,6 +69,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         
         // Courses
         Route::resource('courses', CourseController::class);
+
+        // Playlists
+        Route::resource('playlists', PlaylistController::class);
         
         // Videos
         Route::resource('videos', VideoController::class);
@@ -87,6 +92,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('questions/{question}', [QuestionController::class, 'destroy'])->name('questions.destroy');
         });
         
+        // Institutes
+        Route::post('institutes/{institute}/toggle-status', [InstituteController::class, 'toggleStatus'])->name('institutes.toggle-status');
+        Route::resource('institutes', InstituteController::class);
+
         // Users
         Route::resource('users', UserController::class);
         

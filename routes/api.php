@@ -10,6 +10,14 @@ use App\Http\Controllers\Api\{
     PurchaseController,
     TestAttemptController
 };
+use App\Http\Controllers\Api\Institute\{
+    InstituteAuthController,
+    TeacherManagementController
+};
+use App\Http\Controllers\Api\Teacher\{
+    TeacherAuthController,
+    TeacherContentController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -88,5 +96,54 @@ Route::prefix('v1')->group(function () {
 
     // Payment Webhooks (No Auth Required)
     Route::post('/payment/webhook/{provider}', [PurchaseController::class, 'webhook']);
+
+    /*
+    |--------------------------------------------------------------------------
+    | Institute Admin Routes (Mobile App APIs)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('institute')->group(function () {
+        // Authentication
+        Route::post('/login', [InstituteAuthController::class, 'login']);
+
+        // Authenticated Institute Admin actions
+        Route::middleware(['auth:sanctum', 'institute.admin'])->group(function () {
+            Route::get('/profile', [InstituteAuthController::class, 'profile']);
+            Route::put('/profile', [InstituteAuthController::class, 'updateProfile']);
+            Route::post('/logout', [InstituteAuthController::class, 'logout']);
+
+            // Teacher / Staff Management
+            Route::get('/teachers', [TeacherManagementController::class, 'index']);
+            Route::post('/teachers', [TeacherManagementController::class, 'store']);
+            Route::get('/teachers/{id}', [TeacherManagementController::class, 'show']);
+            Route::put('/teachers/{id}', [TeacherManagementController::class, 'update']);
+            Route::post('/teachers/{id}/toggle-status', [TeacherManagementController::class, 'toggleStatus']);
+            Route::delete('/teachers/{id}', [TeacherManagementController::class, 'destroy']);
+        });
+    });
+
+    /*
+    |--------------------------------------------------------------------------
+    | Teacher Routes (Mobile App APIs - Free Course & Video Access)
+    |--------------------------------------------------------------------------
+    */
+    Route::prefix('teacher')->group(function () {
+        // Authentication
+        Route::post('/login', [TeacherAuthController::class, 'login']);
+
+        // Authenticated Teacher actions
+        Route::middleware(['auth:sanctum', 'teacher'])->group(function () {
+            Route::get('/profile', [TeacherAuthController::class, 'profile']);
+            Route::put('/profile', [TeacherAuthController::class, 'updateProfile']);
+            Route::post('/logout', [TeacherAuthController::class, 'logout']);
+
+            // Courses, Subjects, Playlists, and Videos (Free for teachers)
+            Route::get('/courses', [TeacherContentController::class, 'courses']);
+            Route::get('/courses/{id}', [TeacherContentController::class, 'courseDetails']);
+            Route::get('/courses/{courseId}/subjects/{subjectId}', [TeacherContentController::class, 'subjectContent']);
+            Route::get('/playlists/{id}', [TeacherContentController::class, 'playlistDetails']);
+            Route::get('/videos/{id}', [TeacherContentController::class, 'videoDetails']);
+        });
+    });
 });
 
